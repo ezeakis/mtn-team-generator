@@ -30,7 +30,7 @@ space_of_attempts = []
 for i in range(number_of_attempts):
     this_attempt = {}
     for team in teams:
-        attempt[team] = []
+        this_attempt[team] = []
     space_of_attempts.append(this_attempt)
 
 
