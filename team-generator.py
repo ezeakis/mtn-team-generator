@@ -108,11 +108,21 @@ action = input("Choose: ")
 if action == "1":
     this_name = input("Declare patient name: ")
     query = db.insert(patients_table).values(patient_name=this_name,) 
-    print(query)
+    ResultProxy = connection.execute(query)
+
+elif action == "2":
+    this_name = input("Declare team name: ")
+    query = db.insert(teams_table).values(team_name=this_name,) 
     ResultProxy = connection.execute(query)
 
 elif action == "3":
     results = connection.execute(db.select([patients_table])).fetchall()
+    df = pd.DataFrame(results)
+    df.columns = results[0].keys()
+    print(df.head(10))
+
+elif action == "4":
+    results = connection.execute(db.select([teams_table])).fetchall()
     df = pd.DataFrame(results)
     df.columns = results[0].keys()
     print(df.head(10))
