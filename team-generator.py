@@ -120,8 +120,7 @@ if int(len(teams_results)) != 0:
     print(teams_list)
     for team in teams_list:
         specific_patients_results = db.select([patients_table]).where(patients_table.columns.team_name == team)
-        num_results = specific_patients_results.rowcount
-        if int(num_results) != 0:
+        if int(len(specific_patients_results)) != 0:
             print(specific_patients_results)
     print()
 
