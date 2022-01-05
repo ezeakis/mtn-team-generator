@@ -33,7 +33,7 @@ for i in range(number_of_attempts):
         this_attempt[team] = []
     space_of_attempts.append(this_attempt)
 
-
+#Assignments
 for i in range(number_of_attempts):
     this_attempt = space_of_attempts[i]
     for patient in patients:
@@ -42,5 +42,7 @@ for i in range(number_of_attempts):
 
 
 
-
-print(space_of_attempts)
+#Print of all assignments
+for attempt in space_of_attempts:
+    print("Attempt")
+    print(attempt)
