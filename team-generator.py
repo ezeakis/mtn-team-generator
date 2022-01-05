@@ -176,8 +176,10 @@ elif action == "5":
     print(teams_results_with_minimum_balance_metric)
 
     chosen_team = teams_results_with_minimum_balance_metric[0][0]
+    print("chosen team: ", chosen_team)
 
     next_unassigned_patient = unassigned_patients_results[0][0]
+    print("next_unassigned_patient: ", next_unassigned_patient)
 
     query = db.update(patients_table).values(team_name = chosen_team)
     query = query.where(patients_table.columns.patient_name == next_unassigned_patient)
