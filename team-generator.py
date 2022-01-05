@@ -86,7 +86,7 @@ ResultProxy = connection.execute(query)
 
 #Inserting many records at ones
 query = db.insert(emp) 
-values_list = [{'Id':'2', 'name':'ram', 'salary':80000, 'active':False},
+values_list = [{'Id':'2', 'name':'ram', 'salary':80001, 'active':False},
                {'Id':'3', 'name':'ramesh', 'salary':70000, 'active':True}]
 ResultProxy = connection.execute(query,values_list)
 
