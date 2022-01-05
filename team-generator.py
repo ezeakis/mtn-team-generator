@@ -32,4 +32,4 @@ for patient in patients:
     print(patient, random_team())
 
 
-print matrix
+print(matrix)
