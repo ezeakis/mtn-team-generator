@@ -1,23 +1,23 @@
 import random
 import statistics
 
-patients = [
-    "patient1", 
-    "patient2", 
-    "patient3", 
-    "patient4", 
-    "patient5", 
-    "patient6", 
-    "patient7", 
-    "patient8", 
-]
+# patients = [
+#     "patient1", 
+#     "patient2", 
+#     "patient3", 
+#     "patient4", 
+#     "patient5", 
+#     "patient6", 
+#     "patient7", 
+#     "patient8", 
+# ]
 
-teams = [
-    "team1", 
-    "team2", 
-    "team3", 
-    "team4", 
-]
+# teams = [
+#     "team1", 
+#     "team2", 
+#     "team3", 
+#     "team4", 
+# ]
 
 def random_team():
     random.shuffle(teams)
@@ -31,37 +31,37 @@ def balance_metric(attempt):
 
 
 
-number_of_attempts = 10
+# number_of_attempts = 10
 
-space_of_attempts = []
+# space_of_attempts = []
 
-#Initialization
-for i in range(number_of_attempts):
-    this_attempt = {}
-    for team in teams:
-        this_attempt[team] = []
-    space_of_attempts.append(this_attempt)
+# #Initialization
+# for i in range(number_of_attempts):
+#     this_attempt = {}
+#     for team in teams:
+#         this_attempt[team] = []
+#     space_of_attempts.append(this_attempt)
 
-#Assignments
-for i in range(number_of_attempts):
-    this_attempt = space_of_attempts[i]
-    for patient in patients:
-        this_attempt[random_team()].append(patient)
+# #Assignments
+# for i in range(number_of_attempts):
+#     this_attempt = space_of_attempts[i]
+#     for patient in patients:
+#         this_attempt[random_team()].append(patient)
 
-#Print of all assignments
-for attempt in space_of_attempts:
-    print("Attempt")
-    print(attempt)
-    print(balance_metric(attempt))
-    print()
+# #Print of all assignments
+# for attempt in space_of_attempts:
+#     print("Attempt")
+#     print(attempt)
+#     print(balance_metric(attempt))
+#     print()
 
-#Choose the attempts with better balance metric
-balance_metrics_list = [balance_metric(attempt) for attempt in space_of_attempts]
-optimum_balance_metric = min(balance_metrics_list)
-reduced_attempts_list = [attempt for attempt in space_of_attempts if  balance_metric(attempt) == optimum_balance_metric]
-print("Optimum Attempts")
-for attempt in reduced_attempts_list:
-    print(attempt)
+# #Choose the attempts with better balance metric
+# balance_metrics_list = [balance_metric(attempt) for attempt in space_of_attempts]
+# optimum_balance_metric = min(balance_metrics_list)
+# reduced_attempts_list = [attempt for attempt in space_of_attempts if  balance_metric(attempt) == optimum_balance_metric]
+# print("Optimum Attempts")
+# for attempt in reduced_attempts_list:
+#     print(attempt)
 
 #DB insert
 import sqlalchemy as db
