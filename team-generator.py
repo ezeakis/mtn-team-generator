@@ -97,6 +97,21 @@ metadata.create_all(engine) #Creates the table
 # df.columns = results[0].keys()
 # print(df.head(10))
 
+print("Displaying all patients")
+results = connection.execute(db.select([patients_table])).fetchall()
+df = pd.DataFrame(results)
+df.columns = results[0].keys()
+print(df.head(10))
+print()
+
+print("Displaying all teams")
+results = connection.execute(db.select([teams_table])).fetchall()
+df = pd.DataFrame(results)
+df.columns = results[0].keys()
+print(df.head(10))
+print()
+
+
 print("Please choose an action")
 print("1 for adding a patient")
 print("2 for adding a team")
