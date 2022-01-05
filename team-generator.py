@@ -168,23 +168,24 @@ elif action == "5":
         unassigned_patients_df = pd.DataFrame(unassigned_patients_results)
         unassigned_patients_df.columns = unassigned_patients_results[0].keys()
         print(unassigned_patients_df.head(10))
-    print()
 
-    teams_balance_metrics_list = connection.execute(db.select([teams_table.columns.balance_metric.distinct()])).fetchall()
-    minimum_balance_metric = min([i[0] for i in teams_balance_metrics_list])
-    print(minimum_balance_metric)
+        teams_balance_metrics_list = connection.execute(db.select([teams_table.columns.balance_metric.distinct()])).fetchall()
+        minimum_balance_metric = min([i[0] for i in teams_balance_metrics_list])
+        print(minimum_balance_metric)
 
-    teams_results_with_minimum_balance_metric = connection.execute(db.select([teams_table]).where(teams_table.columns.balance_metric == minimum_balance_metric)).fetchall()
-    random.shuffle(teams_results_with_minimum_balance_metric)
+        teams_results_with_minimum_balance_metric = connection.execute(db.select([teams_table]).where(teams_table.columns.balance_metric == minimum_balance_metric)).fetchall()
+        random.shuffle(teams_results_with_minimum_balance_metric)
 
-    print(teams_results_with_minimum_balance_metric)
+        print(teams_results_with_minimum_balance_metric)
 
-    chosen_team = teams_results_with_minimum_balance_metric[0][0]
-    print("chosen team: ", chosen_team)
+        chosen_team = teams_results_with_minimum_balance_metric[0][0]
+        print("chosen team: ", chosen_team)
 
-    next_unassigned_patient = unassigned_patients_results[0][0]
-    print("next_unassigned_patient: ", next_unassigned_patient)
+        next_unassigned_patient = unassigned_patients_results[0][0]
+        print("next_unassigned_patient: ", next_unassigned_patient)
 
-    query = db.update(patients_table).values(team_name = chosen_team)
-    query = query.where(patients_table.columns.patient_name == next_unassigned_patient)
-    results = connection.execute(query)
+        query = db.update(patients_table).values(team_name = chosen_team)
+        query = query.where(patients_table.columns.patient_name == next_unassigned_patient)
+        results = connection.execute(query)
+
+        print()
