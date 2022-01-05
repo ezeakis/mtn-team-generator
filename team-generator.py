@@ -57,3 +57,7 @@ for attempt in space_of_attempts:
     print(attempt)
     print(balance_metric(attempt))
     print()
+
+#Choose the attempts with better balance metric
+balance_metrics_list = [balance_metric(attempt) for attempt in space_of_attempts]
+print(balance_metrics_list)
