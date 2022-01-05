@@ -106,6 +106,16 @@ if int(len(patients_results)) != 0:
     print(patients_df.head(10))
 print()
 
+
+print("Displaying all teams")
+teams_results = connection.execute(db.select([teams_table])).fetchall()
+if int(len(teams_results)) != 0:
+    teams_df = pd.DataFrame(teams_results)
+    teams_df.columns = teams_results[0].keys()
+    print(teams_df.head(10))
+print()
+
+
 print("Calculating balance metrics...")
 teams_results = connection.execute(db.select([teams_table.columns.team_name])).fetchall()
 if int(len(teams_results)) != 0:
@@ -117,15 +127,6 @@ if int(len(teams_results)) != 0:
         query = query.where(teams_table.columns.team_name == team)
         results = connection.execute(query)
     print()
-
-print("Displaying all teams")
-teams_results = connection.execute(db.select([teams_table])).fetchall()
-if int(len(teams_results)) != 0:
-    teams_df = pd.DataFrame(teams_results)
-    teams_df.columns = teams_results[0].keys()
-    print(teams_df.head(10))
-print()
-
 
 
 print("Please choose an action")
