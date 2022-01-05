@@ -120,15 +120,11 @@ if int(len(teams_results)) != 0:
     print(teams_list)
     for team in teams_list:
         specific_patients_results = connection.execute(db.select([patients_table]).where(patients_table.columns.team_name == team)).fetchall()
-        if int(len(specific_patients_results)) != 0:
-            print(specific_patients_results)
-
+        #if int(len(specific_patients_results)) != 0:
+        #    print(specific_patients_results)
         query = db.update(teams_table).values(balance_metric = int(len(specific_patients_results)))
         query = query.where(teams_table.columns.team_name == team)
         results = connection.execute(query)
-
-
-
     print()
 
 
@@ -169,3 +165,6 @@ elif action == "5":
         unassigned_patients_df.columns = unassigned_patients_results[0].keys()
         print(unassigned_patients_df.head(10))
     print()
+
+    teams_balance_metrics_list = connection.execute(db.select([census.columns.state.distinct()])).fetchall()
+    print(teams_balance_metrics_list)
