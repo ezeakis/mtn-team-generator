@@ -18,20 +18,28 @@ teams = [
     "team4", 
 ]
 
-matrix = {}
-
 def random_team():
     random.shuffle(teams)
     return teams[0]
 
-#initial empty matrix declaration
-for team in teams:
-    matrix[team] = []
+number_of_attempts = 3
 
-for patient in patients:
-    print(patient, random_team())
-    matrix[random_team()].append(patient)
+space_of_attempts = []
+
+#Initialization
+for i in range(number_of_attempts):
+    this_attempt = {}
+    for team in teams:
+        attempt[team] = []
+    space_of_attempts.append(this_attempt)
 
 
 
-print(matrix)
+
+# for patient in patients:
+#     print(patient, random_team())
+#     matrix[random_team()].append(patient)
+
+
+
+print(space_of_attempts)
