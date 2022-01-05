@@ -30,7 +30,7 @@ for team in teams:
 
 for patient in patients:
     print(patient, random_team())
-    matrix[team].append(patient)
+    matrix[random_team()].append(patient)
 
 
 
