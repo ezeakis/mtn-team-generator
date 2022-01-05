@@ -74,7 +74,7 @@ metadata = db.MetaData()
 
 patients_table = db.Table('patients', metadata,
               db.Column('patient_name', db.String(255), nullable=False),
-              db.Column('team_name', db.String(255), nullable=False),
+              db.Column('team_name', db.String(255), nullable=True),
               )
 teams_table = db.Table('teams', metadata,
               db.Column('name', db.String(255), nullable=False),
@@ -100,4 +100,18 @@ metadata.create_all(engine) #Creates the table
 print("Please choose an action")
 print("1 for adding a patient")
 print("2 for adding a team")
+print("3 for listing patients")
+print("4 for listing teams")
+print("5 for displaying combinations")
 action = input("Choose: ")
+
+if action == "1":
+    this_name = input("Declare patient name: ")
+    query = db.insert(patients_table).values(name=this_name,) 
+    ResultProxy = connection.execute(query)
+
+elif action == "3":
+    results = connection.execute(db.select([patients_table])).fetchall()
+    df = pd.DataFrame(results)
+    df.columns = results[0].keys()
+    print(df.head(10))
