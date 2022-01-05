@@ -73,6 +73,10 @@ metadata = db.MetaData()
 
 
 patients_table = db.Table('patients', metadata,
+              db.Column('patient_name', db.String(255), nullable=False),
+              db.Column('team_name', db.String(255), nullable=False),
+              )
+teams_table = db.Table('teams', metadata,
               db.Column('name', db.String(255), nullable=False),
               )
 metadata.create_all(engine) #Creates the table
@@ -82,13 +86,18 @@ metadata.create_all(engine) #Creates the table
 #ResultProxy = connection.execute(query)
 
 #Inserting many records at ones
-query = db.insert(patients_table) 
-values_list = []
-for patient in patients:
-    values_list.append({'name':patient,})
-ResultProxy = connection.execute(query,values_list)
+# query = db.insert(patients_table) 
+# values_list = []
+# for patient in patients:
+#     values_list.append({'name':patient,})
+# ResultProxy = connection.execute(query,values_list)
 
-results = connection.execute(db.select([patients_table])).fetchall()
-df = pd.DataFrame(results)
-df.columns = results[0].keys()
-print(df.head(10))
+# results = connection.execute(db.select([patients_table])).fetchall()
+# df = pd.DataFrame(results)
+# df.columns = results[0].keys()
+# print(df.head(10))
+
+print("Please choose an action")
+print("1 for adding a patient")
+print("2 for adding a team")
+action = input("Choose: ")
