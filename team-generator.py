@@ -34,11 +34,12 @@ for i in range(number_of_attempts):
     space_of_attempts.append(this_attempt)
 
 
+for i in range(number_of_attempts):
+    this_attempt = space_of_attempts[i]
+    for patient in patients:
+        this_attempt[random_team()].append(patient)
 
 
-# for patient in patients:
-#     print(patient, random_team())
-#     matrix[random_team()].append(patient)
 
 
 
