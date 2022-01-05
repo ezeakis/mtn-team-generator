@@ -31,7 +31,7 @@ def balance_metric(attempt):
 
 
 
-number_of_attempts = 3
+number_of_attempts = 10
 
 space_of_attempts = []
 
