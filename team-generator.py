@@ -107,15 +107,6 @@ if int(len(patients_results)) != 0:
 print()
 
 
-print("Displaying all teams")
-teams_results = connection.execute(db.select([teams_table])).fetchall()
-if int(len(teams_results)) != 0:
-    teams_df = pd.DataFrame(teams_results)
-    teams_df.columns = teams_results[0].keys()
-    print(teams_df.head(10))
-print()
-
-
 print("Calculating balance metrics...")
 teams_results = connection.execute(db.select([teams_table.columns.team_name])).fetchall()
 print(teams_results)
@@ -132,12 +123,24 @@ if int(len(teams_results)) != 0:
     print()
 
 
+print("Displaying all teams")
+teams_results = connection.execute(db.select([teams_table])).fetchall()
+if int(len(teams_results)) != 0:
+    teams_df = pd.DataFrame(teams_results)
+    teams_df.columns = teams_results[0].keys()
+    print(teams_df.head(10))
+print()
+
+
+
+
 print("Please choose an action")
 print("1 for adding a patient")
 print("2 for adding a team")
 print("3 for listing patients")
 print("4 for listing teams")
 print("5 for assigning next non-assigned patient to a team")
+print("0 for exit")
 action = input("Choose: ")
 
 if action == "1":
