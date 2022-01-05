@@ -167,4 +167,5 @@ elif action == "5":
     print()
 
     teams_balance_metrics_list = connection.execute(db.select([teams_table.columns.balance_metric.distinct()])).fetchall()
-    print([i[0] for i in teams_balance_metrics_list])
+    minimum_balance_metric = min([i[0] for i in teams_balance_metrics_list])
+    print(minimum_balance_metric)
