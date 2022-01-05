@@ -169,3 +169,8 @@ elif action == "5":
     teams_balance_metrics_list = connection.execute(db.select([teams_table.columns.balance_metric.distinct()])).fetchall()
     minimum_balance_metric = min([i[0] for i in teams_balance_metrics_list])
     print(minimum_balance_metric)
+
+    teams_results_with_minimum_balance_metric = connection.execute(db.select([teams_table]).where(teams_table.columns.balance_metric == minimum_balance_metric)).fetchall()
+    random.shuffle(teams_results_with_minimum_balance_metric)
+
+    print(teams_results_with_minimum_balance_metric)
