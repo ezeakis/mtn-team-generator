@@ -60,4 +60,9 @@ for attempt in space_of_attempts:
 
 #Choose the attempts with better balance metric
 balance_metrics_list = [balance_metric(attempt) for attempt in space_of_attempts]
-print(balance_metrics_list)
+optimum_balance_metric = min(balance_metrics_list)
+reduced_attempts_list = [attempt for attempt in space_of_attempts if  balance_metric(attempt) == optimum_balance_metric]
+print("Optimum Attempts")
+for attempt in reduced_attempts_list:
+    print(attempt)
+
