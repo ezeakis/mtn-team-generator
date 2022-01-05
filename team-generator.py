@@ -24,7 +24,7 @@ def random_team():
     return teams[0]
 
 def balance_metric(attempt):
-    teams_length = [len(team) for team in attempt.keys()]
+    teams_length = [len(team) for team in attempt.values()]
     print(teams_length)
     return statistics.mean(teams_length)
 
