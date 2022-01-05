@@ -77,7 +77,7 @@ patients_table = db.Table('patients', metadata,
               db.Column('team_name', db.String(255), nullable=True),
               )
 teams_table = db.Table('teams', metadata,
-              db.Column('name', db.String(255), nullable=False),
+              db.Column('team_name', db.String(255), nullable=False),
               )
 metadata.create_all(engine) #Creates the table
 
