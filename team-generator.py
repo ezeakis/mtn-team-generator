@@ -78,6 +78,7 @@ patients_table = db.Table('patients', metadata,
               )
 teams_table = db.Table('teams', metadata,
               db.Column('team_name', db.String(255), nullable=False),
+              db.Column('balance_metric', db.Integer(), nullable=True),
               )
 metadata.create_all(engine) #Creates the table
 
@@ -114,6 +115,9 @@ print()
 print("Calculating balance metrics")
 teams_list = teams_df["team_name"].tolist()
 print(teams_list)
+for team in teams_list:
+    specific_patients_results = db.select([patients_table]).where(patients_table.columns.team_name == team)
+    print(specific_patients_results)
 print()
 
 
