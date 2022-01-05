@@ -26,7 +26,8 @@ def random_team():
 def balance_metric(attempt):
     teams_length = [len(team) for team in attempt.values()]
     print(teams_length)
-    return statistics.mean(teams_length)
+    #standard deviation
+    return statistics.stdev(teams_length)
 
 
 
