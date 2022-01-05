@@ -109,6 +109,7 @@ print()
 print("Calculating balance metrics...")
 teams_results = connection.execute(db.select([teams_table])).fetchall()
 if int(len(teams_results)) != 0:
+    teams_df = pd.DataFrame(teams_results)
     teams_list = teams_df["team_name"].tolist()
     print(teams_list)
     for team in teams_list:
