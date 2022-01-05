@@ -127,7 +127,7 @@ if int(len(teams_results)) != 0:
         #if int(len(specific_patients_results)) != 0:
         #    print(specific_patients_results)
         query = db.update(teams_table).values(balance_metric = int(len(specific_patients_results)))
-        query = query.where(teams_table.columns.team_name == team)
+        query = query.where(teams_table.columns.team_name == team_name)
         results = connection.execute(query)
     print()
 
