@@ -166,5 +166,5 @@ elif action == "5":
         print(unassigned_patients_df.head(10))
     print()
 
-    teams_balance_metrics_list = connection.execute(db.select([census.columns.state.distinct()])).fetchall()
+    teams_balance_metrics_list = connection.execute(db.select([teams_table.columns.balance_metric.distinct()])).fetchall()
     print(teams_balance_metrics_list)
