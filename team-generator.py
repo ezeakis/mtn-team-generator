@@ -100,7 +100,7 @@ metadata.create_all(engine) #Creates the table
 
 print("Displaying all patients")
 patients_results = connection.execute(db.select([patients_table])).fetchall()
-num_results = patients_results.rowcount
+num_results = len(patients_results)
 if int(num_results) != 0:
     patients_df = pd.DataFrame(patients_results)
     patients_df.columns = patients_results[0].keys()
