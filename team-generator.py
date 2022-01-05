@@ -174,3 +174,6 @@ elif action == "5":
     random.shuffle(teams_results_with_minimum_balance_metric)
 
     print(teams_results_with_minimum_balance_metric)
+
+    print(teams_results_with_minimum_balance_metric[0][0])
+
