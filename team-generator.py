@@ -100,16 +100,21 @@ metadata.create_all(engine) #Creates the table
 
 print("Displaying all patients")
 patients_results = connection.execute(db.select([patients_table])).fetchall()
-patients_df = pd.DataFrame(patients_results)
-patients_df.columns = patients_results[0].keys()
-print(patients_df.head(10))
+num_results = patients_results.rowcount
+if int(num_results) != 0:
+    patients_df = pd.DataFrame(patients_results)
+    patients_df.columns = patients_results[0].keys()
+    print(patients_df.head(10))
 print()
 
 print("Displaying all teams")
 teams_results = connection.execute(db.select([teams_table])).fetchall()
-teams_df = pd.DataFrame(teams_results)
-teams_df.columns = teams_results[0].keys()
-print(teams_df.head(10))
+
+num_results = teams_results.rowcount
+if int(num_results) != 0:
+    teams_df = pd.DataFrame(teams_results)
+    teams_df.columns = teams_results[0].keys()
+    print(teams_df.head(10))
 print()
 
 print("Calculating balance metrics")
