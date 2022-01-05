@@ -137,6 +137,19 @@ action = 3
 
 while action != 0:
 
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+
+
     print("Calculating balance metrics...")
     teams_results = connection.execute(db.select([teams_table.columns.team_name])).fetchall()
     print(teams_results)
