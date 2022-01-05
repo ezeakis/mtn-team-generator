@@ -100,8 +100,7 @@ metadata.create_all(engine) #Creates the table
 
 print("Displaying all patients")
 patients_results = connection.execute(db.select([patients_table])).fetchall()
-num_results = len(patients_results)
-if int(num_results) != 0:
+if int(len(patients_results)) != 0:
     patients_df = pd.DataFrame(patients_results)
     patients_df.columns = patients_results[0].keys()
     print(patients_df.head(10))
@@ -109,8 +108,7 @@ print()
 
 print("Displaying all teams")
 teams_results = connection.execute(db.select([teams_table])).fetchall()
-num_results = len(teams_results)
-if int(num_results) != 0:
+if int(len(teams_results)) != 0:
     teams_df = pd.DataFrame(teams_results)
     teams_df.columns = teams_results[0].keys()
     print(teams_df.head(10))
