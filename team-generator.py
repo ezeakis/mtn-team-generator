@@ -133,7 +133,7 @@ print("1 for adding a patient")
 print("2 for adding a team")
 print("3 for listing patients")
 print("4 for listing teams")
-print("5 for assigning non-assigned patients to teams")
+print("5 for assigning next non-assigned patient to a team")
 action = input("Choose: ")
 
 if action == "1":
@@ -175,5 +175,10 @@ elif action == "5":
 
     print(teams_results_with_minimum_balance_metric)
 
-    print(teams_results_with_minimum_balance_metric[0][0])
+    chosen_team = teams_results_with_minimum_balance_metric[0][0]
 
+    next_unassigned_patient = unassigned_patients_results[0][0]
+
+    query = db.update(patients_table).values(team_name = chosen_team)
+    query = query.where(patients_table.columns.patient_name == next_unassigned_patient)
+    results = connection.execute(query)
