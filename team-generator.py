@@ -118,6 +118,7 @@ print()
 
 print("Calculating balance metrics...")
 teams_results = connection.execute(db.select([teams_table.columns.team_name])).fetchall()
+print(teams_results)
 if int(len(teams_results)) != 0:
     for team in teams_results:
         specific_patients_results = connection.execute(db.select([patients_table]).where(patients_table.columns.team_name == team)).fetchall()
