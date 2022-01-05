@@ -133,62 +133,80 @@ print()
 
 
 
+action = 3
 
-print("Please choose an action")
-print("1 for adding a patient")
-print("2 for adding a team")
-print("3 for listing patients")
-print("4 for listing teams")
-print("5 for assigning next non-assigned patient to a team")
-print("0 for exit")
-action = input("Choose: ")
+while action != 0:
 
-if action == "1":
-    this_name = input("Declare patient name: ")
-    query = db.insert(patients_table).values(patient_name=this_name,) 
-    ResultProxy = connection.execute(query)
-
-elif action == "2":
-    this_name = input("Declare team name: ")
-    query = db.insert(teams_table).values(team_name=this_name,) 
-    ResultProxy = connection.execute(query)
-
-elif action == "3":
-    results = connection.execute(db.select([patients_table])).fetchall()
-    df = pd.DataFrame(results)
-    df.columns = results[0].keys()
-    print(df.head(10))
-
-elif action == "4":
-    results = connection.execute(db.select([teams_table])).fetchall()
-    df = pd.DataFrame(results)
-    df.columns = results[0].keys()
-    print(df.head(10))
-
-elif action == "5":
-    unassigned_patients_results = connection.execute(db.select([patients_table]).where(patients_table.columns.team_name == None)).fetchall()
-    if int(len(unassigned_patients_results)) != 0:
-        unassigned_patients_df = pd.DataFrame(unassigned_patients_results)
-        unassigned_patients_df.columns = unassigned_patients_results[0].keys()
-        print(unassigned_patients_df.head(10))
-
-        teams_balance_metrics_list = connection.execute(db.select([teams_table.columns.balance_metric.distinct()])).fetchall()
-        minimum_balance_metric = min([i[0] for i in teams_balance_metrics_list])
-        print(minimum_balance_metric)
-
-        teams_results_with_minimum_balance_metric = connection.execute(db.select([teams_table]).where(teams_table.columns.balance_metric == minimum_balance_metric)).fetchall()
-        random.shuffle(teams_results_with_minimum_balance_metric)
-
-        print(teams_results_with_minimum_balance_metric)
-
-        chosen_team = teams_results_with_minimum_balance_metric[0][0]
-        print("chosen team: ", chosen_team)
-
-        next_unassigned_patient = unassigned_patients_results[0][0]
-        print("next_unassigned_patient: ", next_unassigned_patient)
-
-        query = db.update(patients_table).values(team_name = chosen_team)
-        query = query.where(patients_table.columns.patient_name == next_unassigned_patient)
-        results = connection.execute(query)
-
+    print("Calculating balance metrics...")
+    teams_results = connection.execute(db.select([teams_table.columns.team_name])).fetchall()
+    print(teams_results)
+    if int(len(teams_results)) != 0:
+        for team in teams_results:
+            team_name = team[0]
+            print(team_name)
+            specific_patients_results = connection.execute(db.select([patients_table]).where(patients_table.columns.team_name == team_name)).fetchall()
+            #if int(len(specific_patients_results)) != 0:
+            #    print(specific_patients_results)
+            query = db.update(teams_table).values(balance_metric = int(len(specific_patients_results)))
+            query = query.where(teams_table.columns.team_name == team_name)
+            results = connection.execute(query)
         print()
+
+    print("Please choose an action")
+    print("1 for adding a patient")
+    print("2 for adding a team")
+    print("3 for listing patients")
+    print("4 for listing teams")
+    print("5 for assigning next non-assigned patient to a team")
+    print("0 for exit")
+    action = input("Choose: ")
+
+    if action == "1":
+        this_name = input("Declare patient name: ")
+        query = db.insert(patients_table).values(patient_name=this_name,) 
+        ResultProxy = connection.execute(query)
+
+    elif action == "2":
+        this_name = input("Declare team name: ")
+        query = db.insert(teams_table).values(team_name=this_name,) 
+        ResultProxy = connection.execute(query)
+
+    elif action == "3":
+        results = connection.execute(db.select([patients_table])).fetchall()
+        df = pd.DataFrame(results)
+        df.columns = results[0].keys()
+        print(df.head(10))
+
+    elif action == "4":
+        results = connection.execute(db.select([teams_table])).fetchall()
+        df = pd.DataFrame(results)
+        df.columns = results[0].keys()
+        print(df.head(10))
+
+    elif action == "5":
+        unassigned_patients_results = connection.execute(db.select([patients_table]).where(patients_table.columns.team_name == None)).fetchall()
+        if int(len(unassigned_patients_results)) != 0:
+            unassigned_patients_df = pd.DataFrame(unassigned_patients_results)
+            unassigned_patients_df.columns = unassigned_patients_results[0].keys()
+            print(unassigned_patients_df.head(10))
+
+            teams_balance_metrics_list = connection.execute(db.select([teams_table.columns.balance_metric.distinct()])).fetchall()
+            minimum_balance_metric = min([i[0] for i in teams_balance_metrics_list])
+            print(minimum_balance_metric)
+
+            teams_results_with_minimum_balance_metric = connection.execute(db.select([teams_table]).where(teams_table.columns.balance_metric == minimum_balance_metric)).fetchall()
+            random.shuffle(teams_results_with_minimum_balance_metric)
+
+            print(teams_results_with_minimum_balance_metric)
+
+            chosen_team = teams_results_with_minimum_balance_metric[0][0]
+            print("chosen team: ", chosen_team)
+
+            next_unassigned_patient = unassigned_patients_results[0][0]
+            print("next_unassigned_patient: ", next_unassigned_patient)
+
+            query = db.update(patients_table).values(team_name = chosen_team)
+            query = query.where(patients_table.columns.patient_name == next_unassigned_patient)
+            results = connection.execute(query)
+
+            print()
