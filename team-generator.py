@@ -24,5 +24,12 @@ def random_team():
     random.shuffle(teams)
     return teams[0]
 
+#initial empty matrix declaration
+for team in teams:
+    matrix[team] = []
+
 for patient in patients:
     print(patient, random_team())
+
+
+print matrix
