@@ -130,7 +130,7 @@ print("1 for adding a patient")
 print("2 for adding a team")
 print("3 for listing patients")
 print("4 for listing teams")
-print("5 for displaying combinations")
+print("5 for assigning non-assigned patients to teams")
 action = input("Choose: ")
 
 if action == "1":
@@ -154,3 +154,11 @@ elif action == "4":
     df = pd.DataFrame(results)
     df.columns = results[0].keys()
     print(df.head(10))
+
+elif action == "5":
+    unassigned_patients_results = connection.execute(db.select([patients_table]).where(patients_table.columns.team_name == None)).fetchall()
+    if int(len(unassigned_patients_results)) != 0:
+        unassigned_patients_df = pd.DataFrame(unassigned_patients_results)
+        unassigned_patients_df.columns = unassigned_patients_results[0].keys()
+        print(unassigned_patients_df.head(10))
+    print()
