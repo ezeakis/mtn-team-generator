@@ -122,6 +122,13 @@ if int(len(teams_results)) != 0:
         specific_patients_results = connection.execute(db.select([patients_table]).where(patients_table.columns.team_name == team)).fetchall()
         if int(len(specific_patients_results)) != 0:
             print(specific_patients_results)
+
+        query = db.update(teams_table).values(balance_metric = int(len(specific_patients_results)))
+        query = query.where(teams_table.columns.team_name == team)
+        results = connection.execute(query)
+
+
+
     print()
 
 
