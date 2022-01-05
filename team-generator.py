@@ -133,9 +133,9 @@ print()
 
 
 
-action = 3
+action = "3"
 
-while action != 0:
+while action != "0":
 
     print()
     print()
