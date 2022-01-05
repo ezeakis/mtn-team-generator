@@ -112,8 +112,9 @@ print(teams_df.head(10))
 print()
 
 print("Calculating balance metrics")
-teams = teams_df["team_name"]
-print(teams)
+teams_list = teams_df["team_name"].tolist()
+print(teams_list)
+print()
 
 
 print("Please choose an action")
