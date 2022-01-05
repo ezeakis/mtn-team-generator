@@ -107,7 +107,7 @@ action = input("Choose: ")
 
 if action == "1":
     this_name = input("Declare patient name: ")
-    query = db.insert(patients_table).values(name=this_name,) 
+    query = db.insert(patients_table).values(patient_name=this_name,) 
     ResultProxy = connection.execute(query)
 
 elif action == "3":
