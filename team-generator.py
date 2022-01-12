@@ -19,9 +19,9 @@ import statistics
 #     "team4", 
 # ]
 
-def random_team():
-    random.shuffle(teams)
-    return teams[0]
+#def random_team():
+#    random.shuffle(teams)
+#    return teams[0]
 
 def balance_metric(attempt):
     teams_length = [len(team) for team in attempt.values()]
